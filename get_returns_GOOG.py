@@ -23,7 +23,7 @@ def main():
     start_date = "19900101"
     end_date = "20150101"
 
-    print ret_f(symbols[0], start_date, end_date).head()
+    print(ret_f(symbols[0], start_date, end_date).head())
 
 if __name__ == '__main__':
     main()
