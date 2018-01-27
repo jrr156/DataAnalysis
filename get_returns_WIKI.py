@@ -1,7 +1,7 @@
 __author__ = 'joeross'
 # Method for computing log-returns for US Equities
 
-import Quandl as q
+import quandl as q
 import numpy as np
 import pandas as pd
 import sys
@@ -11,12 +11,17 @@ token = "fstXS14pB2xK_pS3zxs6"
 
 
 def ret_f(ticker, start, end, freq="daily"):
-    prices = q.get('WIKI/'+ticker, trim_start=start, trim_end=end, collapse=freq,
-                   authtoken=token)
+    prices = q.get(
+        'WIKI/' + ticker,
+        trim_start=start,
+        trim_end=end,
+        collapse=freq,
+        authtoken=token)
     logret = np.log(prices['Adj. Close'].pct_change() + 1)
     logret = pd.DataFrame(logret)
     logret.columns = [ticker]
     return logret.dropna()
+
 
 def main():
     symbols = ("IBM", "WMT", "C")
@@ -24,6 +29,7 @@ def main():
     end_date = "20150101"
 
     print(ret_f(symbols[0], start_date, end_date).head())
+
 
 if __name__ == '__main__':
     main()
